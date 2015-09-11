@@ -18,8 +18,9 @@ public class EchoClientHandler extends ChannelHandlerAdapter {
 	}
 
 	@Override
-	public void channelActive(ChannelHandlerContext ctx) throws Exception {
+	public void channelActive(ChannelHandlerContext ctx) {
 		for(int i = 0; i < 10; i++) {
+			System.out.println("Send message ... ");
 			ctx.writeAndFlush(Unpooled.copiedBuffer(ECHO_REQ.getBytes()));
 		}
 	}

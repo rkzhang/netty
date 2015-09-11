@@ -2,12 +2,12 @@ package com.my.netty.nio.chapter51;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelHandlerAppender;
+import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelHandler.Sharable;
 
 @Sharable
-public class EchoServerHandler extends ChannelHandlerAppender {
+public class EchoServerHandler extends ChannelHandlerAdapter {
 
 	int counter = 0;
 	

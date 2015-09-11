@@ -22,6 +22,7 @@ public class EchoServer {
 		EventLoopGroup bossGroup = new NioEventLoopGroup();
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
 		
+		try {
 			ServerBootstrap b = new ServerBootstrap();
 			b.group(bossGroup, workerGroup)
 				.channel(NioServerSocketChannel.class)
@@ -41,8 +42,15 @@ public class EchoServer {
 				//绑定端口, 同步等待成功
 				ChannelFuture f = b.bind(port).sync();
 				
+				System.out.println("Server has started");
 				//等待服务端监听端口关闭
 				f.channel().closeFuture().sync();
+		} finally {
+			//优雅退出, 释放线程池资源
+			bossGroup.shutdownGracefully();
+			workerGroup.shutdownGracefully();
+			System.out.println("Server has closed");
+		}
 	}
 
 	public static void main(String[] args) throws Exception {
